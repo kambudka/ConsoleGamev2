@@ -12,11 +12,16 @@ namespace ConsoleGamev2
     {
         public List<Asteroid> asteroidList = new List<Asteroid>();
         private int astcount;
+        private int shipleft;
+        private int shiptop;
+        private int shippoz;
+        private int hearts;
         public void drawMap()
         {
-            int shipleft = 50;
-            int shiptop = 20;
-            int shippoz = 0;
+            hearts = 3;
+            shipleft = 50;
+            shiptop = 20;
+            shippoz = 0;
             astcount = 0;
             Console.ForegroundColor = ConsoleColor.Red;
             Ship.drawShip(shipleft, shiptop, shippoz);
@@ -61,15 +66,18 @@ namespace ConsoleGamev2
                         break;
                     }
                 }
-                asteroidUpdate();
+                if(asteroidUpdate())
+                    break;
                 Thread.Sleep(100);
                 if (astcount <= 3)
                 {
                     asteroidGenerate();
                 }
+
             }
+            asteroidList.Clear();
         }
-        private void asteroidUpdate()
+        private bool asteroidUpdate()
         {
             foreach (Asteroid asteroid in asteroidList)
             {
@@ -79,8 +87,31 @@ namespace ConsoleGamev2
                     astcount--;
                     break;
                 }
+                if (checkCollision(asteroid))
+                    return true;
             }
-
+            return false;
+        }
+        private bool checkCollision(Asteroid asteroid)
+        {
+            switch (asteroid.dir)
+            {
+                case 0:
+                  if (asteroid.pozleft+6 >= shipleft && asteroid.pozleft<= shipleft)
+                        if (asteroid.poztop >= shiptop && asteroid.poztop <= shiptop + 4)
+                            return true;
+                        else if(asteroid.poztop+4 >= shiptop && asteroid.poztop+4 <= shiptop + 4)
+                            return true;
+                break;
+                case 1:
+                    if (asteroid.pozleft <= shipleft+4 && asteroid.pozleft >= shipleft)
+                        if (asteroid.poztop >= shiptop && asteroid.poztop <= shiptop + 4)
+                            return true;
+                        else if (asteroid.poztop + 4 >= shiptop && asteroid.poztop + 4 <= shiptop + 4)
+                            return true;
+                    break;
+            }
+            return false;
         }
         private void asteroidGenerate()
         {
@@ -100,7 +131,7 @@ namespace ConsoleGamev2
         }
         private bool checkLeft(int left)
         {
-            if (left <= 0)
+            if (left <= 1)
                 return false;
             else if (left >= 118)
                 return false;

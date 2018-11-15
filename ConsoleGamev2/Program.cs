@@ -78,10 +78,12 @@ namespace ConsoleApp1
             Console.CursorVisible = false;
             Map nowa = new Map();
             int menuitem = 0;
+            int hearts = 3;
             while (true)
             {
                 while (menuitem != 1)
                 {
+                    hearts = 3;
                     menuitem = Menu.ShowMenu();
                     if (menuitem == 2)
                         Tablica.ShowTable();
@@ -90,9 +92,12 @@ namespace ConsoleApp1
 
                 }
                 Interface.drawInterface();
-                Interface.drawHearths(3);
+                Interface.drawHearths(hearts);
                 nowa.drawMap();
-                menuitem = 0;
+                hearts--;
+                if(hearts==0)
+                    menuitem = 0;
+
                 Console.Clear();
                 Console.ResetColor();
             }

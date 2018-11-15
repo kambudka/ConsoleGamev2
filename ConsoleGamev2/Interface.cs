@@ -29,8 +29,10 @@ namespace ConsoleGamev2
         {
             Console.ForegroundColor = ConsoleColor.Red;
             int poz=1;
-            for (int i = 1; i <= count; i++)
+            for (int i = 1; i <= 3; i++)
             {
+                if(i>count)
+                    Console.ForegroundColor = ConsoleColor.Black;
                 Console.SetCursorPosition(poz, 1);
                 Console.WriteLine(" ::: ::: ");
                 Console.SetCursorPosition(poz, 2);
