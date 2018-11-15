@@ -98,16 +98,16 @@ namespace ConsoleGamev2
             {
                 case 0:
                   if (asteroid.pozleft+6 >= shipleft && asteroid.pozleft<= shipleft)
-                        if (asteroid.poztop >= shiptop && asteroid.poztop <= shiptop + 4)
+                        if (asteroid.poztop >= shiptop && asteroid.poztop <= shiptop + 3)
                             return true;
-                        else if(asteroid.poztop+4 >= shiptop && asteroid.poztop+4 <= shiptop + 4)
+                        else if(asteroid.poztop+4 >= shiptop && asteroid.poztop+4 <= shiptop + 3)
                             return true;
                 break;
                 case 1:
                     if (asteroid.pozleft <= shipleft+4 && asteroid.pozleft >= shipleft)
-                        if (asteroid.poztop >= shiptop && asteroid.poztop <= shiptop + 4)
+                        if (asteroid.poztop >= shiptop && asteroid.poztop <= shiptop + 3)
                             return true;
-                        else if (asteroid.poztop + 4 >= shiptop && asteroid.poztop + 4 <= shiptop + 4)
+                        else if (asteroid.poztop + 4 >= shiptop && asteroid.poztop + 4 <= shiptop + 3)
                             return true;
                     break;
             }
@@ -124,7 +124,7 @@ namespace ConsoleGamev2
             }
             else
             {
-                mala = new Asteroid(100, rng.Next(6, 36), 1);
+                mala = new Asteroid(114, rng.Next(6, 36), 1);
             }
             asteroidList.Add( mala);
             astcount++;

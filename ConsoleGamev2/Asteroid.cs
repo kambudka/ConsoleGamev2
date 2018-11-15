@@ -51,7 +51,7 @@ namespace ConsoleGamev2
                 Console.Write("  ");
                 Console.SetCursorPosition(pozleft - 1, poztop + 3);
                 Console.Write("   ");
-                if (pozleft + 2 >= 110)
+                if (pozleft + 2 >= 114)
                 {
                     destroySmall(pozleft, poztop);
                     return false;
