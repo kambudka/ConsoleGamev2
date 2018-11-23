@@ -77,9 +77,11 @@ namespace ConsoleApp1
         {
             Console.CursorVisible = false;
             Map nowa = new Map();
+
             int menuitem = 0;
             int hearts = 3;
-            while (true)
+
+            while (menuitem!=3)
             {
                 while (menuitem != 1)
                 {
@@ -88,15 +90,29 @@ namespace ConsoleApp1
                     if (menuitem == 2)
                         Tablica.ShowTable();
                     else if (menuitem == 3)
-                        Autorzy.ShowAutors();
+                        break;
+                        //Autorzy.ShowAutors(); 
 
                 }
-                Interface.drawInterface();
-                Interface.drawHearths(hearts);
+
+                Interface.DrawInterface(); //Rysowanie ramki
+                Interface.DrawHearths(hearts); //Rysowanie liczby serc
+                Interface.DrawStartPoints(); // Rysowanie startowych zer jako punktów
+                Interface.DrawPoints(9); // Rysowanie właściwych punktów
+                //ConsoleGamev2.Ship.drawShipExplode(shipleft, shiptop, shippoz); // Rysuje eksplozje statku 
                 nowa.drawMap();
                 hearts--;
-                if(hearts==0)
+                if (hearts == 0)
+                {
                     menuitem = 0;
+
+                    //*********************************
+                    // 3 Funkcje malujące ekran koncowy
+                    Interface.DrawEndGame();
+                    Interface.DrawEndPoints(24);
+                    Interface.AnimateEndEnter();
+                    //*********************************
+                }
 
                 Console.Clear();
                 Console.ResetColor();
@@ -109,7 +125,6 @@ namespace ConsoleApp1
 
 
             List<int> array = new List<int>();
-
             MediumAsteroid big = new MediumAsteroid();
 
             char[][] render = new char[mapHeight][];
@@ -145,7 +160,7 @@ namespace ConsoleApp1
 
             while (true)
             {
-                Interface.drawHearths(1);
+                Interface.DrawHearths(1);
                 Console.SetCursorPosition(0, 0);
                 Console.CursorVisible = false;
 
@@ -400,12 +415,12 @@ namespace ConsoleApp1
                 {
                     Console.WriteLine(render[i]);
                 }
-                Interface.drawInterface();
-                Interface.drawHearths(2);
+                Interface.DrawInterface();
+                Interface.DrawHearths(2);
                 for (i = 0; i < mapHeight; i++)
                     for (y = 0; y < mapWidth; y++)
                         map[i, y] = ' ';
-                Thread.Sleep(250);
+                Thread.Sleep(100);
 
             }
             Console.Clear();

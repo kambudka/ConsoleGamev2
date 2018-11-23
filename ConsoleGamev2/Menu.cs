@@ -21,7 +21,7 @@ namespace ConsoleGamev2
             Console.SetWindowSize(122,40 );
             while (true)
             {
-                string selectedMenuItem = drawMenu(menuItems);
+                string selectedMenuItem = DrawMenu(menuItems);
                 Console.Clear();
                 if (selectedMenuItem == "Nowa Gra")
                 {
@@ -45,7 +45,7 @@ namespace ConsoleGamev2
             }
         }
 
-        public static void drawTitle()
+        public static void DrawTitle()
         {
             Console.SetCursorPosition(20,3);
             Console.WriteLine(" _______  _______ _________ _______  _______  _______ _________ ______   _______");
@@ -66,7 +66,7 @@ namespace ConsoleGamev2
 
         }
 
-        public static void drawNowaGra(int left,int top)
+        public static void DrawNowaGra(int left,int top)
         {
             Console.SetCursorPosition(left, top);
             Console.Write("     __                       ___           ");
@@ -80,7 +80,7 @@ namespace ConsoleGamev2
             Console.Write("\\_\\ \\/ \\___/ \\_/\\_/ \\__,_| \\____/|_|  \\__,_|");
         }
 
-        public static void drawWyniki(int left, int top)
+        public static void DrawWyniki(int left, int top)
         {
             Console.SetCursorPosition(left, top);
             Console.Write(" __    __             _ _    _ ");
@@ -96,7 +96,7 @@ namespace ConsoleGamev2
             Console.Write("          |___/                ");
         }
 
-        public static void drawAutorzy(int left, int top)
+        public static void DrawAutorzy(int left, int top)
         {
             Console.SetCursorPosition(left, top);
             Console.Write("   _         _                       ");
@@ -112,7 +112,7 @@ namespace ConsoleGamev2
             Console.Write("                               |___/ ");
         }
 
-        public static void drawExit(int left, int top)
+        public static void DrawExit(int left, int top)
         {
             Console.SetCursorPosition(left, top);
             Console.Write("   __      _ _   ");
@@ -126,39 +126,39 @@ namespace ConsoleGamev2
             Console.Write("\\__/ /_/\\_\\_|\\__|");
         }
 
-        public static string drawMenu(List<string> items)
+        public static string DrawMenu(List<string> items)
         {
             int top = 12;
-            drawTitle();
+            DrawTitle();
             for (int i = 0; i < items.Count; i++)
             {
                 if (i == index)
                 {
                     Console.SetCursorPosition(50, top);
-                    Console.BackgroundColor = ConsoleColor.Gray;
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
                     Console.ForegroundColor = ConsoleColor.Black;
 
                     if(i == 0)
-                        drawNowaGra(35, top);
+                        DrawNowaGra(35, top);
                     else if (i == 1)
-                        drawWyniki(42, top);
+                        DrawWyniki(42, top);
                     else if (i == 2)
-                        drawAutorzy(40, top);
+                        DrawAutorzy(39, top);
                     else if (i == 3)
-                        drawExit(50, top);
+                        DrawExit(50, top);
                     //Console.WriteLine(items[i]);
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     if (i == 0)
-                        drawNowaGra(35, top);
+                        DrawNowaGra(35, top);
                     else if (i == 1)
-                        drawWyniki(42, top);
+                        DrawWyniki(42, top);
                     else if (i == 2)
-                        drawAutorzy(40, top);
+                        DrawAutorzy(39, top);
                     else if (i == 3)
-                        drawExit(50, top);
+                        DrawExit(50, top);
                     //Console.SetCursorPosition(50, 12+i);
                     //Console.WriteLine(items[i]);
                 }

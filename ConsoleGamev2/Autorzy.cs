@@ -6,7 +6,7 @@ namespace ConsoleGamev2
 {
     class Autorzy
     {
-        public static void drawTitle()
+        public static void DrawTitle()
         {
             Console.SetCursorPosition(20, 3);
             Console.WriteLine("   _____          __                              ");
@@ -25,7 +25,7 @@ namespace ConsoleGamev2
 
         public static void ShowAutors()
         {
-            drawTitle();
+            DrawTitle();
             Console.ReadKey();
         }
     }

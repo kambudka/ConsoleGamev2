@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ConsoleGamev2
 {
     class Ship
     {
-        public static void drawShip(int left, int top,int poz)
+        public static void DrawShip(int left, int top,int poz)
         {
             if (poz == 0)
             {
@@ -58,7 +60,30 @@ namespace ConsoleGamev2
             }
         }
 
-        public static void clearShip(int left, int top, int poz)
+        public static void DrawShipExplode(int left, int top,int poz)
+        {
+            ClearShip(left, top, poz);
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.SetCursorPosition(left + 2, top + 1);
+            Console.Write(" ** ");
+            Console.SetCursorPosition(left + 2, top + 2);
+            Console.Write(" * ");
+            Thread.Sleep(200);
+            Console.SetCursorPosition(left , top);
+            Console.Write(" **   ** ");
+            Console.SetCursorPosition(left, top + 3);
+            Console.Write(" **   ** ");
+            Thread.Sleep(200);
+            Console.SetCursorPosition(left-2, top-1);
+            Console.Write(" **        ** ");
+            Console.SetCursorPosition(left-2, top + 4);
+            Console.Write(" **        ** ");
+            Thread.Sleep(200);
+        }
+
+
+
+        public static void ClearShip(int left, int top, int poz)
         {
             if (poz == 0)
             {

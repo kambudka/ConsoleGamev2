@@ -7,6 +7,20 @@ namespace ConsoleGamev2
     class Tablica
     {
         private static int index = 0;
+        private List<string> nameList;
+        private List<string> scoreList;
+
+        public Tablica()
+        {
+            nameList = new List<string>() {
+                "Kamil",
+                "Piotr",
+                "Łukasz",
+                "Maciek"
+            };
+
+        }
+
         public static void ShowTable()
         {
             List<string> nameItems = new List<string>() {
@@ -41,5 +55,11 @@ namespace ConsoleGamev2
             Console.Clear();
         }
 
+
+        public void AddToTable(string name, int points)
+        {
+
+
+        }
     }
 }

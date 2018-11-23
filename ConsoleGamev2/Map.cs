@@ -24,7 +24,7 @@ namespace ConsoleGamev2
             shippoz = 0;
             astcount = 0;
             Console.ForegroundColor = ConsoleColor.Red;
-            Ship.drawShip(shipleft, shiptop, shippoz);
+            Ship.DrawShip(shipleft, shiptop, shippoz);
             while (true)
             {
                 if (Console.KeyAvailable)
@@ -32,52 +32,55 @@ namespace ConsoleGamev2
                     ConsoleKeyInfo key = Console.ReadKey(true);
                     if (key.Key.Equals(ConsoleKey.UpArrow))
                     {
-                        Ship.clearShip(shipleft, shiptop, shippoz);
+                        Ship.ClearShip(shipleft, shiptop, shippoz);
                         shippoz = 0;
-                        if(checkTop(shiptop -1))shiptop -= 1;
+                        if(CheckTop(shiptop -1))shiptop -= 1;
                         
-                        Ship.drawShip(shipleft, shiptop, 0);
+                        Ship.DrawShip(shipleft, shiptop, 0);
                     }
                     if (key.Key.Equals(ConsoleKey.DownArrow))
                     {
-                        Ship.clearShip(shipleft, shiptop, shippoz);
+                        Ship.ClearShip(shipleft, shiptop, shippoz);
                         shippoz = 3;
-                        if (checkTop(shiptop + 1)) shiptop += 1;
+                        if (CheckTop(shiptop + 1)) shiptop += 1;
 
-                        Ship.drawShip(shipleft, shiptop, 3);
+                        Ship.DrawShip(shipleft, shiptop, 3);
                     }
                     if (key.Key.Equals(ConsoleKey.LeftArrow))
                     {
-                        Ship.clearShip(shipleft, shiptop, shippoz);
+                        Ship.ClearShip(shipleft, shiptop, shippoz);
                         shippoz = 2;
-                        if (checkLeft(shipleft - 2)) shipleft -= 2;
+                        if (CheckLeft(shipleft - 2)) shipleft -= 2;
                         
-                        Ship.drawShip(shipleft, shiptop, 2);
+                        Ship.DrawShip(shipleft, shiptop, 2);
                     }
                     if (key.Key.Equals(ConsoleKey.RightArrow))
                     {
-                        Ship.clearShip(shipleft, shiptop, shippoz);
+                        Ship.ClearShip(shipleft, shiptop, shippoz);
                         shippoz = 1;
-                        if (checkLeft(shipleft + 2)) shipleft += 2;
-                        Ship.drawShip(shipleft, shiptop, 1);
+                        if (CheckLeft(shipleft + 2)) shipleft += 2;
+                        Ship.DrawShip(shipleft, shiptop, 1);
                     }
                     if (key.Key.Equals(ConsoleKey.Escape))
                     {
                         break;
                     }
                 }
-                if(asteroidUpdate())
+                if (AsteroidUpdate())
+                {
+                    Ship.DrawShipExplode(shipleft, shiptop,shippoz);
                     break;
+                }
                 Thread.Sleep(100);
                 if (astcount <= 3)
                 {
-                    asteroidGenerate();
+                    AsteroidGenerate();
                 }
 
             }
             asteroidList.Clear();
         }
-        private bool asteroidUpdate()
+        private bool AsteroidUpdate()
         {
             foreach (Asteroid asteroid in asteroidList)
             {
@@ -87,12 +90,36 @@ namespace ConsoleGamev2
                     astcount--;
                     break;
                 }
-                if (checkCollision(asteroid))
+                if (CheckCollision(asteroid))
                     return true;
             }
             return false;
         }
-        private bool checkCollision(Asteroid asteroid)
+
+        private bool CheckMissleCollision(Asteroid asteroid)
+        {
+            switch (asteroid.dir)
+            {
+                case 0:
+                    if (asteroid.pozleft + 6 >= shipleft && asteroid.pozleft <= shipleft)
+                        if (asteroid.poztop >= shiptop && asteroid.poztop <= shiptop + 3)
+                            return true;
+                        else if (asteroid.poztop + 4 >= shiptop && asteroid.poztop + 4 <= shiptop + 3)
+                            return true;
+                    break;
+                case 1:
+                    if (asteroid.pozleft <= shipleft + 4 && asteroid.pozleft >= shipleft)
+                        if (asteroid.poztop >= shiptop && asteroid.poztop <= shiptop + 3)
+                            return true;
+                        else if (asteroid.poztop + 4 >= shiptop && asteroid.poztop + 4 <= shiptop + 3)
+                            return true;
+                    break;
+            }
+            return false;
+        }
+
+
+        private bool CheckCollision(Asteroid asteroid)
         {
             switch (asteroid.dir)
             {
@@ -113,7 +140,7 @@ namespace ConsoleGamev2
             }
             return false;
         }
-        private void asteroidGenerate()
+        private void AsteroidGenerate()
         {
             int value;
             Random rng = new Random();
@@ -129,7 +156,8 @@ namespace ConsoleGamev2
             asteroidList.Add( mala);
             astcount++;
         }
-        private bool checkLeft(int left)
+
+        private bool CheckLeft(int left)
         {
             if (left <= 1)
                 return false;
@@ -139,7 +167,7 @@ namespace ConsoleGamev2
                 return true;
 
         }
-        private bool checkTop(int top)
+        private bool CheckTop(int top)
         {
             if (top <= 5)
                 return false;
